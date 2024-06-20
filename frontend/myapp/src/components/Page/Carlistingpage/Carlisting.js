@@ -113,7 +113,6 @@ const isAdmin = props.isAdmin;
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          
           marginTop:'12vh'
         }}
       >
@@ -124,6 +123,7 @@ const isAdmin = props.isAdmin;
             color: 'white',
             fontWeight: 'bold',
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+            marginLeft:'2vw'
           }}
         >
           Welcome to Our Car Dealership
@@ -131,120 +131,119 @@ const isAdmin = props.isAdmin;
       </Box>
 
       <Container
-        sx={{
-          marginTop: '4vh',
-          padding: '2vh',
-          borderRadius: '10px',
-          backgroundColor: 'white', // Light blue background
-        }}
-      >
-        <Typography
-          variant="h4"
-          component="h4"
-          sx={{
-            fontWeight: 'bold',
-            mb: 4,
-            color: 'black',
-            textAlign: 'center',
-            marginTop: '4vh',
-          }}
-        >
-          Filter
-        </Typography>
-        <Container
-          sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-          }}
-        >
-          <TextField
-            label="Make"
-            name="make"
-            value={filters.make}
-            onChange={handleFilterChange}
-            sx={{
-              marginRight: '1rem',
-              width: '30vw',
-              backgroundColor: 'lightgrey', // Light blue background
-              
-              '& .MuiOutlinedInput-root': {
-                '&.Mui-focused fieldset': {
-                  borderColor: 'white',
-                },
-              },
-            }}
-          />
-          <TextField
-            label="Model"
-            name="model"
-            value={filters.model}
-            onChange={handleFilterChange}
-            sx={{
-              width: '30vw',
-              backgroundColor: 'lightgrey', // Light blue background
-              
-              '& .MuiOutlinedInput-root': {
-                '&.Mui-focused fieldset': {
-                  borderColor: 'blue',
-                },
-              },
-            }}
-          />
-          <Box sx={{ marginTop: '2vh', width: '100%', display: 'flex', justifyContent: 'center' }}>
-            <TextField
-              label="Year"
-              name="year"
-              type="number"
-              value={filters.year}
-              onChange={handleFilterChange}
-              sx={{
-                marginRight: '1rem',
-                backgroundColor: 'lightgrey', // Light blue background
-                
-                '& .MuiOutlinedInput-root': {
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'blue',
-                  },
-                },
-              }}
-            />
-            <TextField
-              label="Min Price"
-              name="minPrice"
-              type="number"
-              value={filters.minPrice}
-              onChange={handleFilterChange}
-              sx={{
-                marginRight: '1rem',
-                backgroundColor: 'lightgrey', // Light blue background
-                
-                '& .MuiOutlinedInput-root': {
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'blue',
-                  },
-                },
-              }}
-            />
-            <TextField
-              label="Max Price"
-              name="maxPrice"
-              type="number"
-              value={filters.maxPrice}
-              onChange={handleFilterChange}
-              sx={{
-                backgroundColor: 'lightgrey', // Light blue background
-                
-                '& .MuiOutlinedInput-root': {
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'blue',
-                  },
-                },
-              }}
-            />
-          </Box>
-        </Container>
-      </Container>
+  sx={{
+    marginTop: '4vh',
+    padding: '2vh',
+    borderRadius: '10px',
+    backgroundColor: 'white',
+  }}
+>
+  <Typography
+    variant="h4"
+    component="h4"
+    sx={{
+      fontWeight: 'bold',
+      mb: 4,
+      color: 'black',
+      textAlign: 'center',
+    }}
+  >
+    Filter
+  </Typography>
+  <Container
+    sx={{
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      gap: '1rem',
+      alignItems: 'center',
+    }}
+  >
+    <TextField
+      label="Make"
+      name="make"
+      value={filters.make}
+      onChange={handleFilterChange}
+      sx={{
+        marginRight: { md: '1rem', xs: '0' },
+        width: { md: '30vw', xs: '90%' },
+        backgroundColor: 'lightgrey',
+        '& .MuiOutlinedInput-root': {
+          '&.Mui-focused fieldset': {
+            borderColor: 'blue',
+          },
+        },
+      }}
+    />
+    <TextField
+      label="Model"
+      name="model"
+      value={filters.model}
+      onChange={handleFilterChange}
+      sx={{
+        marginRight: { md: '1rem', xs: '0' },
+        width: { md: '30vw', xs: '90%' },
+        backgroundColor: 'lightgrey',
+        '& .MuiOutlinedInput-root': {
+          '&.Mui-focused fieldset': {
+            borderColor: 'blue',
+          },
+        },
+      }}
+    />
+    <TextField
+      label="Year"
+      name="year"
+      type="number"
+      value={filters.year}
+      onChange={handleFilterChange}
+      sx={{
+        marginRight: { md: '1rem', xs: '0' },
+        width: { md: '30vw', xs: '90%' },
+        backgroundColor: 'lightgrey',
+        '& .MuiOutlinedInput-root': {
+          '&.Mui-focused fieldset': {
+            borderColor: 'blue',
+          },
+        },
+      }}
+    />
+    <TextField
+      label="Min Price"
+      name="minPrice"
+      type="number"
+      value={filters.minPrice}
+      onChange={handleFilterChange}
+      sx={{
+        marginRight: { md: '1rem', xs: '0' },
+        width: { md: '30vw', xs: '90%' },
+        backgroundColor: 'lightgrey',
+        '& .MuiOutlinedInput-root': {
+          '&.Mui-focused fieldset': {
+            borderColor: 'blue',
+          },
+        },
+      }}
+    />
+    <TextField
+      label="Max Price"
+      name="maxPrice"
+      type="number"
+      value={filters.maxPrice}
+      onChange={handleFilterChange}
+      sx={{
+        width: { md: '30vw', xs: '90%' },
+        backgroundColor: 'lightgrey',
+        '& .MuiOutlinedInput-root': {
+          '&.Mui-focused fieldset': {
+            borderColor: 'blue',
+          },
+        },
+      }}
+    />
+  </Container>
+</Container>
+
 
 
       {filteredCarData &&

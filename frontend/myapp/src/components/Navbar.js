@@ -84,10 +84,50 @@ function DrawerAppBar(props) {
                 fontWeight: 'bold' 
               }}
             >
-              <MinorCrashIcon sx={{ mr: 1 }} /> {/* Adds margin to the right */}
-              <Link variant="h6" sx={{ my: 2, color: 'black', cursor:'pointer' }} underline='none' href='/' >
-             Regal Cars
-      </Link>
+             
+             
+              <Link
+  variant="h6"
+  sx={{
+    my: 2,
+    color: 'black',
+    cursor: 'pointer',
+    textDecoration: 'none',
+    display: 'flex',
+    alignItems: 'center',
+  }}
+  href='/'
+>
+  <Container
+    sx={{
+      display: 'flex',
+      alignItems: 'center',
+      marginLeft: '5vw',
+      padding: 0,
+    }}
+  >
+
+    <Box
+      sx={{
+        background: 'rgb(56,77,125)',
+        borderRadius: '50%',
+        width: '40px',
+        height: '40px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white',
+        fontWeight: 'bold',
+        marginRight: '10px',
+      }}
+    >
+      RC
+    </Box>
+    <Typography variant="h6">Regal Cars</Typography>
+  </Container>
+</Link>
+             
+     
             </Typography>
             <Box sx={{ display: { xs: 'none', sm: 'block' }, color: 'black' }}>
              
