@@ -1,6 +1,7 @@
 import React, { useState , useEffect } from 'react'
 import DrawerAppBar from '../../Navbar'
 import Filter from './Carlisting'
+import Footer from '../../Footer';
 function Carspage(props) {
 
  const [isAdmin , setIsAdmin]=useState(false)
@@ -14,6 +15,7 @@ function Carspage(props) {
     <>
     <DrawerAppBar isAdmin={isAdmin}> </DrawerAppBar>
       <Filter isAdmin={isAdmin} ></Filter>
+      <Footer></Footer>
       </>
   )
 }
