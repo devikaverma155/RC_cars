@@ -44,6 +44,13 @@ Follow these steps to set up the Car Listing Website locally:
 - Use the search bar or apply filters to narrow down the list according to your preferences.
 - Click on a car to view its detailed information.
 
+  ![image](https://github.com/devikaverma155/LakeCityCars/assets/129597590/722adcae-37ce-41da-9ee6-34da09290cbc)
+  ![image](https://github.com/devikaverma155/LakeCityCars/assets/129597590/ff116a40-3422-4ee7-8017-4210055fe286)
+  ![image](https://github.com/devikaverma155/LakeCityCars/assets/129597590/a90ea7b1-d722-4f2f-8b80-16ecb5e8e772)
+  ![image](https://github.com/devikaverma155/LakeCityCars/assets/129597590/006d6238-417b-4b66-822a-18ee16a14d28)
+
+
+
 ### Admin Operations
 - Log in using your admin credentials.
 - Go to the admin dashboard.
