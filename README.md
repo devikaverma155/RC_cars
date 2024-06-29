@@ -17,7 +17,8 @@ Follow these steps to set up the Car Listing Website locally:
 1. **Clone the repository:**
     ```bash
     git clone https://github.com/your-username/car-listing-website.git
-    cd car-listing-website
+    cd frontend
+    cd myapp
     ```
 
 2. **Install dependencies:**
