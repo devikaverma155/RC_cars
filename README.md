@@ -16,7 +16,7 @@ Follow these steps to set up the Car Listing Website locally:
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/car-listing-website.git
+    git clone [https://github.com/your-username/car-listing-website.git](https://github.com/devikaverma155/LakeCityCars.git)
     cd frontend
     cd myapp
     ```
