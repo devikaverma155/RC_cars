@@ -12,6 +12,7 @@ function Carspage(props) {
       setIsAdmin(JSON.parse(storedIsAdmin));
     }
   }, []);
+ console.log(isAdmin)
   return (
     <Box sx={{overflowX:'hidden'}}>
     <DrawerAppBar isAdmin={isAdmin}> </DrawerAppBar>

@@ -1,5 +1,5 @@
 import MinorCrashIcon from '@mui/icons-material/MinorCrash';
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,18 +11,24 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Container , Link } from '@mui/material';
 import {useTheme,useMediaQuery} from  '@mui/material'
-
+import { useEffect } from 'react';
 const drawerWidth = 240;
 
 
 function DrawerAppBar(props) {
-  const { window, isAdmin } = props;
+  const [isAdmin , setIsAdmin]=useState(false)
+  useEffect(() => {
+    const storedIsAdmin = localStorage.getItem('isAdmin');
+    if (storedIsAdmin) {
+      setIsAdmin(JSON.parse(storedIsAdmin));
+    }
+  }, []);
+  const { window} = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -89,11 +95,17 @@ function DrawerAppBar(props) {
               <ListItemText primary='View Cars' />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+         {isAdmin &&  <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: 'center', color: 'black' }} href='/form'>
               <ListItemText primary='Add Cars'/>
             </ListItemButton>
-          </ListItem>
+          </ListItem>}
+         { !isAdmin && 
+          <ListItem disablePadding>
+            <ListItemButton sx={{ textAlign: 'center', color: 'black' }} href='/admin'>
+              <ListItemText primary='Admin'/>
+            </ListItemButton>
+          </ListItem>}
       </List>
     </Box> </>
      
