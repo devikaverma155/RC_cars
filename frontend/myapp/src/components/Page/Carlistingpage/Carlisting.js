@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardMedia,Box, Typography, useMediaQuery, useTheme, Button,TextField, Container } from '@mui/material';
+import { Card,CardContent,CardActions,IconButton, CardMedia,Box, Typography, useMediaQuery, useTheme, Button,TextField, Container,Grid } from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import firebase from 'firebase/compat/app'; // Import the Firebase app module
@@ -7,15 +7,14 @@ import 'firebase/compat/database'; // Import the Firebase Realtime Database modu
 import Image from '../Carlistingpage/banner.jpg'
 import DeleteIcon from '@mui/icons-material/Delete';
 const firebaseConfig = {
-  apiKey: "AIzaSyDmO0vrdLTY0D2I8WMHc7N6h4SE2rZWes0",
-  authDomain: "regalcars-6c6e2.firebaseapp.com",
-  databaseURL: "https://regalcars-6c6e2-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "regalcars-6c6e2",
-  storageBucket: "regalcars-6c6e2.appspot.com",
-  messagingSenderId: "33147586232",
-  appId: "1:33147586232:web:181e698ceaabb724e6164d",
-  measurementId: "G-FL04JYNYSK"
+  apiKey: "AIzaSyC48_1pWAT595IlcGgWcVFp2UJbgsTLIYM",
+  authDomain: "rcregalcars.firebaseapp.com",
+  projectId: "rcregalcars",
+  storageBucket: "rcregalcars.appspot.com",
+  messagingSenderId: "161162509749",
+  appId: "1:161162509749:web:f04e53fcc5feb61f5c6dfc"
 };
+
 
 
 firebase.initializeApp(firebaseConfig);
@@ -37,6 +36,7 @@ const isAdmin = props.isAdmin;
             id: key,
             ...value,
           }));
+          console.log(data)
           setCarData(cars);
         }
       } catch (error) {
@@ -55,7 +55,20 @@ const isAdmin = props.isAdmin;
     year: '',
     minPrice: '',
     maxPrice: '',
+    color: '',
+    fuelType: '',
+    transmission: '',
+    minMileage: '',
+    maxMileage: '',
   });
+
+  const handleFilterChange = (event) => {
+    const { name, value } = event.target;
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: value,
+    }));
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCarInfo((prevState) => ({
@@ -79,30 +92,41 @@ const isAdmin = props.isAdmin;
       console.log('You do not have permission to delete car data');
     }
   };
-  const handleFilterChange = (event) => {
-    const { name, value } = event.target;
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
-  };
+ 
 
   const filteredCarData = carData.filter((car) => {
-    const { make, model, year, price } = car;
-    const { make: filterMake, model: filterModel, year: filterYear, minPrice, maxPrice } = filters;
+    const { make, model, year, price, color, fuelType, transmission, mileage } = car;
+    const { 
+      make: filterMake, 
+      model: filterModel, 
+      year: filterYear, 
+      minPrice, 
+      maxPrice,
+      color: filterColor,
+      fuelType: filterFuelType,
+      transmission: filterTransmission,
+      minMileage,
+      maxMileage
+    } = filters;
+
 
     return (
       (!filterMake || make.toLowerCase().includes(filterMake.toLowerCase())) &&
       (!filterModel || model.toLowerCase().includes(filterModel.toLowerCase())) &&
       (!filterYear || year === Number(filterYear)) &&
       (!minPrice || price >= Number(minPrice)) &&
-      (!maxPrice || price <= Number(maxPrice))
+      (!maxPrice || price <= Number(maxPrice)) &&
+      (!filterColor || color.toLowerCase().includes(filterColor.toLowerCase())) &&
+      (!filterFuelType || fuelType === filterFuelType) &&
+      (!filterTransmission || transmission === filterTransmission) &&
+      (!minMileage || mileage >= Number(minMileage)) &&
+      (!maxMileage || mileage <= Number(maxMileage))
     );
   });
   return (
-    <>
+    <Box sx={{overflowX:'clip'}}>
     
-    <Box
+    <Box 
         sx={{
           backgroundImage: `url(${Image})`,
           backgroundSize: 'cover',
@@ -113,7 +137,8 @@ const isAdmin = props.isAdmin;
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          marginTop:'12vh'
+          marginTop:isSmallScreen?'10vh':'',
+          overflowX:'hidden'
         }}
       >
         <Typography
@@ -130,12 +155,13 @@ const isAdmin = props.isAdmin;
         </Typography>
       </Box>
 
-      <Container
+      <Container 
   sx={{
     marginTop: '4vh',
     padding: '2vh',
     borderRadius: '10px',
     backgroundColor: 'white',
+    overflowX:'hidden'
   }}
 >
   <Typography
@@ -148,7 +174,7 @@ const isAdmin = props.isAdmin;
       textAlign: 'center',
     }}
   >
-    Filter
+    Find the right choice for you 
   </Typography>
   <Container
     sx={{
@@ -232,6 +258,7 @@ const isAdmin = props.isAdmin;
       value={filters.maxPrice}
       onChange={handleFilterChange}
       sx={{
+        marginRight: { md: '1rem', xs: '0' },
         width: { md: '30vw', xs: '90%' },
         backgroundColor: 'lightgrey',
         '& .MuiOutlinedInput-root': {
@@ -241,85 +268,164 @@ const isAdmin = props.isAdmin;
         },
       }}
     />
+
+  <TextField
+      label="Color"
+      name="color"
+      type="text"
+      value={filters.color}
+      onChange={handleFilterChange}
+      sx={{
+        marginRight: { md: '1rem', xs: '0' },
+        width: { md: '30vw', xs: '90%' },
+        backgroundColor: 'lightgrey',
+        '& .MuiOutlinedInput-root': {
+          '&.Mui-focused fieldset': {
+            borderColor: 'blue',
+          },
+        },
+      }}
+    />
+    <TextField
+      label="Fuel Type"
+      name="fuelType"
+      type="text"
+      value={filters.fuelType}
+      onChange={handleFilterChange}
+      sx={{
+        marginRight: { md: '1rem', xs: '0' },
+        width: { md: '30vw', xs: '90%' },
+        backgroundColor: 'lightgrey',
+        '& .MuiOutlinedInput-root': {
+          '&.Mui-focused fieldset': {
+            borderColor: 'blue',
+          },
+        },
+      }}
+    /><TextField
+    label="Transmission"
+    name="transmission"
+    type="text"
+    value={filters.transmission}
+    onChange={handleFilterChange}
+    sx={{
+      marginRight: { md: '1rem', xs: '0' },
+      width: { md: '30vw', xs: '90%' },
+      backgroundColor: 'lightgrey',
+      '& .MuiOutlinedInput-root': {
+        '&.Mui-focused fieldset': {
+          borderColor: 'blue',
+        },
+      },
+    }}
+  />
+
   </Container>
 </Container>
-
-
-
-      {filteredCarData &&
-        filteredCarData.map((car) => (
-          <Card
-            key={car.id}
-            sx={{
-              display: 'flex',
-              flexDirection: isSmallScreen ? 'column' : 'row',
-              width: '80%',
-              margin: '20px auto',
-             height:'60vh',
-              color: 'white',
-              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
-              transition: 'transform 0.2s, box-shadow 0.2s',
-              '&:hover': {
-                transform: 'scale(1.05)',
-                boxShadow: '0 8px 16px rgba(0, 0, 0, 0.3)',
-              },
-              borderRadius: '10px',
-              overflow: 'hidden',
+<Container>
+<Grid container spacing={2} sx={{ padding: '20px' }} >
+  {filteredCarData && filteredCarData.map((car) => (
+    <Grid item xs={12} sm={6} md={4} key={car.id}>
+      <Card
+        sx={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          transition: 'transform 0.2s, box-shadow 0.2s',
+          '&:hover': {
+            transform: 'translateY(-5px)',
+            boxShadow: '0 12px 20px rgba(0, 0, 0, 0.2)',
+          },
+          borderRadius: '12px',
+          overflow: 'hidden',
+          backgroundColor: '#f5f5f5',
+        }}
+      >
+{ car.images && 
+<CardMedia
+  sx={{
+    position: 'relative',
+   
+    overflow: 'hidden',
+  }}
+>
+  <Carousel
+    showThumbs={false}
+    infiniteLoop
+    useKeyboardArrows
+    autoPlay
+    showArrows={true}
+    showStatus={false}
+    showIndicators={true}
+    interval={5000}
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+    }}
+  >
+    {car.images &&
+      car.images.map((image, index) => (
+        <div 
+          key={index} 
+          style={{ 
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#f0f0f0',
+          }}
+        >
+          <img
+            src={image}
+            alt={`${car.make} ${car.model}`}
+            style={{
+              maxWidth: '100%',
+              maxHeight: '100%',
+              objectFit: 'contain',
             }}
-          >
-            <CardMedia
-              component="div"
-              sx={{
-                flex: '1 1 50%',
-                padding: '20px',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                minHeight: '10vh',
-              }}
+          />
+        </div>
+      ))}
+  </Carousel>
+</CardMedia>}
+        <CardContent sx={{ flexGrow: 1, padding: '16px' }}>
+          <Typography variant="h6" component="div" gutterBottom>
+            {car.make} {car.model}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Year: {car.year} | Price: ${car.price.toLocaleString()}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Color: {car.color} | Mileage: {car.mileage.toLocaleString()} miles
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Fuel Type: {car.fuelType}
+          </Typography>
+        </CardContent>
+        {isAdmin && (
+          <CardActions sx={{ justifyContent: 'flex-end', padding: '8px 16px' }}>
+            <IconButton
+              onClick={() => handleDelete(car.id)}
+              size="small"
+              color="error"
+              aria-label="delete"
             >
-              <Carousel showThumbs={false} infiniteLoop useKeyboardArrows autoPlay>
-                {car.images &&
-                  car.images.map((image, index) => (
-                    <div key={index}>
-                      <img src={image} alt={`Carousel item ${index}`} style={{ width: '100%', height: 'auto' }} />
-                    </div>
-                  ))}
-              </Carousel>
-            </CardMedia>
-            <Box sx={{ flex: '1 1 50%', padding: '20px', color: 'black', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', marginTop:'10%' }}>
-              <div>
-                <Typography variant="h5" component="div">
-                 {car.make} 
-                </Typography>
-                <Typography variant="h5" component="div">
-               Car Model: {car.model}
-                </Typography>
-                
-                <Typography variant="h5" color="text.primary">
-                  Year: {car.year} <br />
-                  Price: {car.price}
-                </Typography>
-              </div>
-              {isAdmin && (
-                <Button variant="contained"  onClick={() => handleDelete(car.id)} sx={{
-                  background: 'transparent',
-                  color: 'white',
-                  marginTop: '5vh',
-                  width: '10vw',
-                  height:'7vh',
-               
-                  '&:hover': {
-                      backgroundColor: 'white',
-                    },
-                }}>
-                 <DeleteIcon sx={{color:'black'}}></DeleteIcon>
-                </Button>
-              )}
-            </Box>
-          </Card>
-        ))}
-    </>);
+              <DeleteIcon />
+            </IconButton>
+          </CardActions>
+        )}
+      </Card>
+    </Grid>
+  ))}
+</Grid>
+</Container>
+
+    </Box>
+    );
 };
 
 export default Filter;

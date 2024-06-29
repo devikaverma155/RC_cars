@@ -16,11 +16,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Container , Link } from '@mui/material';
-
-
+import {useTheme,useMediaQuery} from  '@mui/material'
 
 const drawerWidth = 240;
-const navItems = ['Home', 'Browse Cars', 'Contact'];
+
 
 function DrawerAppBar(props) {
   const { window, isAdmin } = props;
@@ -31,13 +30,55 @@ function DrawerAppBar(props) {
   };
 
   const drawer = (
+    <>
+    
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Link variant="h6" sx={{ my: 2, color: 'black', cursor:'pointer' }} underline='none' href='/' >
-             Regal Cars
-      </Link>
+   
       <Divider />
       <List>
-       
+<Link
+        variant="h6"
+        sx={{
+          my: 2,
+          color: 'black',
+          cursor: 'pointer',
+          textDecoration: 'none',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+        href='/'
+      >
+        <Container
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            marginLeft: '5vw',
+            padding: 0,
+            
+          }}
+      
+        >
+      
+          <Box
+            sx={{
+              background: 'rgb(56,77,125)',
+              borderRadius: '50%',
+              width: '40px',
+              height: '40px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              color: 'white',
+              fontWeight: 'bold',
+              marginRight: '10px',
+            }}
+          >
+            RC
+          </Box>
+          <Typography variant="h6">Regal Cars</Typography>
+        </Container>
+      </Link>
+      
           <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: 'center', color: 'black' }} href='/' >
               <ListItemText primary='Home' />
@@ -45,7 +86,7 @@ function DrawerAppBar(props) {
           </ListItem>
           <ListItem disablePadding>
             <ListItemButton sx={{ textAlign: 'center', color: 'black' }} href='/carslisting'>
-              <ListItemText primary='Cars' />
+              <ListItemText primary='View Cars' />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
@@ -54,14 +95,20 @@ function DrawerAppBar(props) {
             </ListItemButton>
           </ListItem>
       </List>
-    </Box>
+    </Box> </>
+     
+
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-
+  const theme=useTheme();
+  const match=useMediaQuery(theme.breakpoints.down('sm'));
+  
+  
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+     
       <AppBar component="nav" sx={{ background: 'white', boxShadow: 'none' , paddingTop:'2vh' , paddingBottom:'1vh' }}>
         <Container>
           <Toolbar>
@@ -72,7 +119,26 @@ function DrawerAppBar(props) {
               onClick={handleDrawerToggle}
               sx={{ mr: 2, display: { sm: 'none' }, color: 'black' }}
             >
-              <MenuIcon />
+
+    <Box
+      sx={{
+        background: 'rgb(56,77,125)',
+        borderRadius: '50%',
+        width: '40px',
+        height: '40px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white',
+        fontWeight: 'bold',
+        marginRight: '10px',
+      }}
+    >
+      RC
+    </Box>
+    
+
+
             </IconButton>
             <Typography
               variant="h6"
@@ -104,7 +170,9 @@ function DrawerAppBar(props) {
       alignItems: 'center',
       marginLeft: '5vw',
       padding: 0,
+      
     }}
+
   >
 
     <Box
@@ -135,7 +203,7 @@ function DrawerAppBar(props) {
                  Home
                 </Button>
                 <Button sx={{ color: 'black' }} href='/carslisting'>
-                  Cars
+                 View Cars
                 </Button>
                 {!isAdmin && 
                 <Button sx={{ color: 'black' }} href='/admin'>
@@ -150,13 +218,70 @@ function DrawerAppBar(props) {
         </Container>
       </AppBar>
       <nav>
+      <Typography
+              variant="h6"
+              component="div"
+              sx={{ 
+                flexGrow: 1, 
+                color: 'black', 
+                display: { xs: 'none', sm: 'block' },
+                fontWeight: 'bold' 
+              }}
+            >
+             
+             
+              <Link
+  variant="h6"
+  sx={{
+    my: 2,
+    color: 'black',
+    cursor: 'pointer',
+    textDecoration: 'none',
+    display: 'flex',
+    alignItems: 'center',
+  }}
+  href='/'
+>
+  <Container
+    sx={{
+      display: 'flex',
+      alignItems: 'center',
+      marginLeft: '5vw',
+      padding: 0,
+      
+    }}
+
+  >
+
+    <Box
+      sx={{
+        background: 'rgb(56,77,125)',
+        borderRadius: '50%',
+        width: '40px',
+        height: '40px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white',
+        fontWeight: 'bold',
+        marginRight: '10px',
+      }}
+    >
+      RC
+    </Box>
+    <Typography variant="h6">Regal Cars</Typography>
+  </Container>
+</Link>
+             
+     
+            </Typography>
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },

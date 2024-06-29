@@ -1,11 +1,14 @@
 import React from 'react'
 import { Box, Container, Grid, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import TestimonialCard from './TestimonialCards';
+import Image1 from './custom1.jpeg'
+import Image2 from './custom2.jpeg'
+import Image3 from './custom3.jpeg'
 
 const cards = [
-  { title: 'Car 1', image: 'https://via.placeholder.com/300x200', description: 'Pre-loved car 1 description' },
-  { title: 'Car 2', image: 'https://via.placeholder.com/300x200', description: 'Pre-loved car 2 description' },
-  { title: 'Car 3', image: 'https://via.placeholder.com/300x200', description: 'Pre-loved car 3 description' },
+  { title: 'Car 1', image: `${Image1}`, description: 'Pre-loved car 1 description' },
+  { title: 'Car 2', image: `${Image2}`, description: 'Pre-loved car 2 description' },
+  { title: 'Car 3', image: `${Image3}`, description: 'Pre-loved car 3 description' },
 
   // Add more cards as needed
 ];
@@ -25,12 +28,12 @@ function CardGrid() {
             marginTop:'4vh'
           }}
         >
-          hundereds of happy customers
+          Hundereds of happy customers!!
         </Typography>
         <Grid container spacing={4}>
           {cards.map((card, index) => (
             <Grid item key={index} xs={12} sm={6} md={4}>
-            <TestimonialCard></TestimonialCard>
+            <TestimonialCard image={card.image} ></TestimonialCard>
             </Grid>
           ))}
         </Grid>
