@@ -1,13 +1,29 @@
 import React from 'react'
 import { Box, Container, Grid, Card, CardContent, CardMedia, Typography, Link } from '@mui/material'
+import Image1 from './car1.jpg';
+import Image2 from './car2.jpg';
+import Image3 from './car3.jpg';
 
 const cards = [
-  { title: 'Car 1', image: 'https://via.placeholder.com/300x200', description: 'Pre-loved car 1 description' },
-  { title: 'Car 2', image: 'https://via.placeholder.com/300x200', description: 'Pre-loved car 2 description' },
-  { title: 'Car 3', image: 'https://via.placeholder.com/300x200', description: 'Pre-loved car 3 description' },
+  {
+    title: 'Petrol',
+    image: `${Image1}`,
+    description: 'Experience the classic power and performance of petrol engines, known for their quick acceleration and widespread availability.'
+  },
+  {
+    title: 'Diesel',
+    image: `${Image2}`,
+    description: 'Enjoy the robust torque and fuel efficiency of diesel engines, perfect for long-distance travel and heavy-duty vehicles.'
+  },
+  {
+    title: 'Electric',
+    image: `${Image3}`,
+    description: 'Discover the future of driving with electric cars, offering zero emissions, quiet operation, and instant torque for a smooth ride.'
+  },
 
   // Add more cards as needed
 ];
+
 
 function CardGrid() {
   return (
